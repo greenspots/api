@@ -2,6 +2,8 @@ package elastic
 
 import (
 	"context"
+	"github.com/greenspots/api/config"
+	"github.com/greenspots/model"
 	"github.com/olivere/elastic/v7"
 	"log"
 )

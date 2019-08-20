@@ -1,6 +1,8 @@
-package main
+package api
 
 import (
+	"github.com/greenspots/api/config"
+	"github.com/greenspots/api/controller"
 	"github.com/justinas/alice"
 	"log"
 	"net/http"

@@ -1,7 +1,7 @@
 package controller
 
 import (
-	"greenspot/api/elastic"
+	"github.com/greenspots/api/elastic"
 )
 
 type (

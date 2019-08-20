@@ -3,6 +3,7 @@ package controller
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/greenspots/model"
 	"io/ioutil"
 	"log"
 	"net/http"

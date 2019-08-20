@@ -2,6 +2,7 @@ package controller
 
 import (
 	"fmt"
+	"github.com/greenspots/api/config"
 	"net/http"
 	"sync"
 )
