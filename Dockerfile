@@ -1,11 +1,19 @@
-FROM golang:latest
-RUN mkdir /go/src/greenspot
-RUN cd /go/src/greenspot
-RUN mkdir api
-ADD .. /go/src/greenspot/api
-RUN go get github.com/olivere/elastic
-RUN go get github.com/julienschmidt/httprouter
-RUN go get github.com/justinas/alice
-RUN cd /go/src
-RUN go install -v greenspot/api/...
-CMD ["/go/bin/gspot-api"]
+
+#BUILD STAGE
+FROM golang as builder
+ENV GO111MODULE=on
+WORKDIR /workspace/greenspots/api
+COPY go.mod .
+COPY go.sum .
+RUN go mod download
+COPY . .
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o gspot-api
+
+EXPOSE 8888
+ENTRYPOINT ["/workspace/greenspots/api/gspot-api"]
+
+#FINAL STAGE
+FROM scratch
+COPY --from=builder /workspace/greenspots/api/gspot-api /api/
+EXPOSE 8888
+ENTRYPOINT ["/api/gspot-api"]
